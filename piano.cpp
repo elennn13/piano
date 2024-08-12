@@ -5,16 +5,15 @@
 // Функция для отображения пианино
 void displayPiano() {
     std::cout << "   | Z | X | C | V | B | N | M |\n";
-    std::cout << "   |   |   |   |   |   |   |   |\n";
-    std::cout << "   |---|---|---|---|---|---|---|\n";
-    std::cout << "     C   D   E   F   G   A   B\n\n";
 }
 
 // Функция для отображения нажатой клавиши
 void pressKey(char key) {
+    const int keys_number = 7;
+    const char keys[] = "zxcvbnm";
     std::cout << "   ";
-    for (char c = 'Z'; c <= 'M'; ++c) {
-        if (c == key) {
+    for (size_t i = 0; i < keys_number; ++i) {
+        if (key == keys[i]) {
             std::cout << "| # ";
         }
         else {
@@ -50,9 +49,10 @@ void playSound(char key) {
 int main() {
     char key;
     displayPiano(); // Показываем начальное пианино
+    pressKey('\0');
 
     while (true) {
-        key = _getch(); // Ожидаем нажатия клавиши
+        key = std::tolower(_getch()); // Ожидаем нажатия клавиши
 
         // Очистка экрана (имитация)
         system("cls");
